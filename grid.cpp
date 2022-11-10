@@ -14,10 +14,6 @@ Grid::Grid(const Dimension& gridSize, const Dimension& cellSize) {
     }
 }
 
-Grid::~Grid() {
-
-}
-
 bool Grid::inBounds(const Coordinate& c) {
     return c.x >= 0 && c.x < this->length && c.y >= 0 && c.y < this->width; 
 }

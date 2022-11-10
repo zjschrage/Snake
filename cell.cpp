@@ -7,10 +7,6 @@ Cell::Cell(const Coordinate& c, const Dimension& d) {
     this->state = EMPTY;
 }
 
-Cell::~Cell() {
-    
-}
-
 void Cell::changeState(const CellState& s) {
     this->state = s;
     switch (s) {

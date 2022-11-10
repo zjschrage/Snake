@@ -9,7 +9,7 @@ class Grid {
 public:
     Grid() = default;
     Grid(const Dimension& gridSize, const Dimension& cellSize);
-    ~Grid();
+    ~Grid() {}
     int getLength() {return length;};
     int getWidth() {return width;};
     std::queue<Coordinate>& getUpdateQueue() {return updateQueue;};
