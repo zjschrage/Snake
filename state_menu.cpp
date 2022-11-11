@@ -17,7 +17,7 @@ void MenuState::handleEvents(sf::RenderWindow& window) {
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) window.close();
         if (event.type == sf::Event::MouseButtonPressed) {
-            auto state = std::make_unique<GameState>(Dimension(cellSize.x, cellSize.y), Dimension((float)gridSize.x/cellSize.x, (float)gridSize.y/cellSize.y), Coordinate(12, 12), TOROIDAL);
+            auto state = std::make_unique<GameState>(Dimension(gridSize.x, gridSize.y), Dimension(cellSize.x, cellSize.y), Coordinate(12, 12), TOROIDAL);
             StateSingleton::setState(std::move(state));
         }
     }

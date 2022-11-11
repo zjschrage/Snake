@@ -13,8 +13,8 @@ enum CellState {
 class Cell {
 public:
     Cell(const Coordinate& c, const Dimension& d);
-    ~Cell() {}
-    const CellState& getState() {return state;};
+    ~Cell() = default;
+    const CellState& getState() {return state;}
     void changeState(const CellState& s);
     const sf::RectangleShape& getGraphicCell();
 

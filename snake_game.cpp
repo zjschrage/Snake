@@ -23,9 +23,7 @@ int main() {
     sf::Clock clock;
     window.setFramerateLimit(FPS);
 
-    // auto state = std::make_unique<MenuState>(Dimension(SIZE_X, SIZE_Y), Dimension((float)DIM_X/SIZE_X, (float)DIM_Y/SIZE_Y));
-    // StateSingleton::setState(std::move(state));
-    auto state = std::make_unique<GameState>(Dimension(SIZE_X, SIZE_Y), Dimension((float)DIM_X/SIZE_X, (float)DIM_Y/SIZE_Y), Coordinate(12, 12), TOROIDAL);
+    auto state = std::make_unique<MenuState>(Dimension(SIZE_X, SIZE_Y), Dimension((float)DIM_X/SIZE_X, (float)DIM_Y/SIZE_Y));
     StateSingleton::setState(std::move(state));
 
     while (window.isOpen()) {
