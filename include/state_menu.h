@@ -12,6 +12,7 @@
 class MenuState : public IState {
 public:
     MenuState(const Dimension& gridSize, const Dimension& cellSize);
+    ~MenuState();
     void init() override;
     void handleEvents(sf::RenderWindow& window) override;
     void tick() override;
@@ -31,4 +32,6 @@ private:
     bool running;
 
     void tinkerTitleColor(uint32_t& fontColor);
+    void setupTitle();
+    void setupButtons();
 };

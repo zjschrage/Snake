@@ -12,5 +12,5 @@ void SettingsButton::hover() {
 }
 
 void SettingsButton::action() {
-    
+    printf("Settings\n");
 }

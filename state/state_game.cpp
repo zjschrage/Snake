@@ -1,7 +1,6 @@
 #include "state_game.h"
 #include "state_menu.h"
 #include "state_singleton.h"
-#include <iostream>
 
 GameState::GameState(const Dimension& gridSize, const Dimension& cellSize, const Coordinate& snakeStart, WrapStyle wrapStyle) {
     this->g = Grid(gridSize, cellSize);
