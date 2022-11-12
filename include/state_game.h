@@ -30,4 +30,6 @@ private:
     WrapStyle wrapStyle;
     bool running;
 
+    void reset();
+
 };

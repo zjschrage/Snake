@@ -23,15 +23,21 @@ void GameState::handleEvents(sf::RenderWindow& window) {
     sf::Event event;
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) window.close();
-        if (event.type == sf::Event::KeyPressed) {
-            tentativeDirection = getDirection(event.key.code);
-            if (!running && event.key.code == sf::Keyboard::Key::Enter) {
-                auto state = std::make_unique<MenuState>(gridSize, cellSize);
-                StateSingleton::setState(std::move(state));
-                break;
+        if (running) {
+            if (event.type == sf::Event::KeyPressed) tentativeDirection = getDirection(event.key.code);
+        } 
+        else {
+            if (event.type == sf::Event::KeyPressed) {
+                if (event.key.code == sf::Keyboard::Key::Enter) reset();
             }
+            if (event.type == sf::Event::MouseButtonPressed) reset();
         }
     }
+}
+
+void GameState::reset() {
+    auto state = std::make_unique<MenuState>(gridSize, cellSize);
+    StateSingleton::setState(std::move(state));
 }
 
 void GameState::tick() {
