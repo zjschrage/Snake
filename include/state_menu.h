@@ -5,6 +5,9 @@
 #include "snake.h"
 #include "direction.h"
 #include "state_game.h"
+#include "button_play.h"
+#include "button_settings.h"
+#include "button_help.h"
 
 class MenuState : public IState {
 public:
@@ -18,6 +21,14 @@ public:
 private:
     Dimension gridSize;
     Dimension cellSize;
+    uint32_t fontColor;
+    uint32_t fontAnimCycle;
+    sf::Font font;
+    sf::Text text;
+    Button* playButton;
+    Button* settingsButton;
+    Button* helpButton;
     bool running;
 
+    void tinkerTitleColor(uint32_t& fontColor);
 };

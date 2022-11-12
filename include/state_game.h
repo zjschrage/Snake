@@ -23,6 +23,8 @@ public:
 private:
     Grid g;
     Snake s;
+    Dimension gridSize;
+    Dimension cellSize;
     Direction tentativeDirection;
     Direction currentDirection;
     WrapStyle wrapStyle;

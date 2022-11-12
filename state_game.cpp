@@ -1,9 +1,13 @@
 #include "state_game.h"
+#include "state_menu.h"
+#include "state_singleton.h"
 #include <iostream>
 
 GameState::GameState(const Dimension& gridSize, const Dimension& cellSize, const Coordinate& snakeStart, WrapStyle wrapStyle) {
     this->g = Grid(gridSize, cellSize);
     this->s = Snake(snakeStart);
+    this->gridSize = gridSize;
+    this->cellSize = cellSize;
     this->tentativeDirection = UP;
     this->currentDirection = UP;
     this->wrapStyle = wrapStyle;
@@ -20,7 +24,14 @@ void GameState::handleEvents(sf::RenderWindow& window) {
     sf::Event event;
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) window.close();
-        if (event.type == sf::Event::KeyPressed) tentativeDirection = getDirection(event.key.code);
+        if (event.type == sf::Event::KeyPressed) {
+            tentativeDirection = getDirection(event.key.code);
+            if (!running && event.key.code == sf::Keyboard::Key::Enter) {
+                auto state = std::make_unique<MenuState>(gridSize, cellSize);
+                StateSingleton::setState(std::move(state));
+                break;
+            }
+        }
     }
 }
 
