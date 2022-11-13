@@ -6,6 +6,7 @@
 #include "direction.h"
 #include "dimension.h"
 #include "state_singleton.h"
+#include "singleton.h"
 #include "istate.h"
 #include "state_game.h"
 #include "state_menu.h"
@@ -18,6 +19,7 @@ int main() {
 
     auto state = std::make_unique<MenuState>(Dimension(SIZE_X, SIZE_Y), Dimension((float)DIM_X/SIZE_X, (float)DIM_Y/SIZE_Y));
     StateSingleton::setState(std::move(state));
+    //Singleton<IState>::set(std::move(state));
 
     while (window.isOpen()) {
 

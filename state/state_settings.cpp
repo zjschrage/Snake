@@ -1,21 +1,21 @@
-#include "state_help.h"
+#include "state_settings.h"
 #include "constants.h"
 
-HelpState::HelpState() {
+SettingsState::SettingsState() {
     this->running = true;
     this->init();
 }
 
-HelpState::~HelpState() {
+SettingsState::~SettingsState() {
     //delete menuButton;
 }
 
-void HelpState::init() {
+void SettingsState::init() {
     setupText();
     setupBackButton();
 }
 
-void HelpState::setupText() {
+void SettingsState::setupText() {
     sf::Font f;
     f.loadFromFile("fonts/PixeloidSans.ttf");
     this->font = f;
@@ -26,17 +26,17 @@ void HelpState::setupText() {
     this->text = t;
 }
 
-void HelpState::setupBackButton() {
-    int bWidth = BUTTON_WIDTH;
-    int bHeight = BUTTON_LENGTH;
+void SettingsState::setupBackButton() {
+    int bWidth = 280;
+    int bHeight = 80;
     int bStartingY = 1000;
     Dimension size = Dimension(bWidth, bHeight);
-    sf::Color color = sf::Color(BUTTON_COLOR);
+    sf::Color color = sf::Color(0x47fc86ff);
     Coordinate c = Coordinate((DIM_X - bWidth)/2, bStartingY);
     menuButton = new MenuButton(c, size, color);
 }
 
-void HelpState::handleEvents(sf::RenderWindow& window) {
+void SettingsState::handleEvents(sf::RenderWindow& window) {
     sf::Event event;
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) window.close();
@@ -46,11 +46,11 @@ void HelpState::handleEvents(sf::RenderWindow& window) {
     }
 }
 
-void HelpState::tick() {
+void SettingsState::tick() {
 
 }
 
-void HelpState::render(sf::RenderWindow& window) {
+void SettingsState::render(sf::RenderWindow& window) {
     window.clear();
     window.draw(text);
     menuButton->render(window);

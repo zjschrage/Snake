@@ -1,5 +1,6 @@
 #include "state_menu.h"
 #include "state_singleton.h"
+#include "constants.h"
 
 MenuState::MenuState(const Dimension& gridSize, const Dimension& cellSize) {
     this->gridSize = gridSize;
@@ -26,19 +27,19 @@ void MenuState::setupTitle() {
     this->font = f;
     sf::Text t("snake", font, 100);
     t.setFillColor(sf::Color(fontColor));
-    t.setPosition(((gridSize.x * cellSize.x) - t.getGlobalBounds().width)/2, 200);
+    t.setPosition((DIM_X - t.getGlobalBounds().width)/2, 200);
     this->text = t;
 }
 
 void MenuState::setupButtons() {
-    int bWidth = 280;
-    int bHeight = 80;
+    int bWidth = BUTTON_WIDTH;
+    int bHeight = BUTTON_LENGTH;
     int bStartingY = 500;
     Dimension size = Dimension(bWidth, bHeight);
-    sf::Color color = sf::Color(0x47fc86ff);
-    Coordinate c1 = Coordinate(((gridSize.x * cellSize.x) - bWidth)/2, bStartingY);
-    Coordinate c2 = Coordinate(((gridSize.x * cellSize.x) - bWidth)/2, bStartingY + 100);
-    Coordinate c3 = Coordinate(((gridSize.x * cellSize.x) - bWidth)/2, bStartingY + 200);
+    sf::Color color = sf::Color(BUTTON_COLOR);
+    Coordinate c1 = Coordinate((DIM_X - bWidth)/2, bStartingY);
+    Coordinate c2 = Coordinate((DIM_X - bWidth)/2, bStartingY + 100);
+    Coordinate c3 = Coordinate((DIM_X - bWidth)/2, bStartingY + 200);
     this->playButton = new PlayButton(c1, size, color, gridSize, cellSize);
     this->settingsButton = new SettingsButton(c2, size, color);
     this->helpButton = new HelpButton(c3, size, color);

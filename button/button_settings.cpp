@@ -1,5 +1,5 @@
 #include "button_settings.h"
-#include "state_game.h"
+#include "state_settings.h"
 #include "state_singleton.h"
 
 SettingsButton::SettingsButton(Coordinate position, Dimension size, sf::Color color) 
@@ -12,5 +12,6 @@ void SettingsButton::hover() {
 }
 
 void SettingsButton::action() {
-    printf("Settings\n");
+    auto state = std::make_unique<SettingsState>();
+    StateSingleton::setState(std::move(state));
 }
