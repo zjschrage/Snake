@@ -27,13 +27,16 @@ void SettingsState::setupText() {
 }
 
 void SettingsState::setupBackButton() {
-    int bWidth = 280;
-    int bHeight = 80;
+    int bWidth = BUTTON_WIDTH;
+    int bHeight = BUTTON_LENGTH;
     int bStartingY = 1000;
     Dimension size = Dimension(bWidth, bHeight);
-    sf::Color color = sf::Color(0x47fc86ff);
+    Dimension size2 = Dimension(bHeight, bHeight);
+    sf::Color color = sf::Color(BUTTON_COLOR);
     Coordinate c = Coordinate((DIM_X - bWidth)/2, bStartingY);
+    Coordinate c2 = Coordinate((DIM_X - bWidth)/2, bStartingY - 200);
     menuButton = new MenuButton(c, size, color);
+    audioButton = new AudioButton(c2, size2, color);
 }
 
 void SettingsState::handleEvents(sf::RenderWindow& window) {
@@ -42,6 +45,7 @@ void SettingsState::handleEvents(sf::RenderWindow& window) {
         if (event.type == sf::Event::Closed) window.close();
         if (event.type == sf::Event::MouseButtonPressed) {
             if (menuButton->contains(Coordinate(event.mouseButton.x, event.mouseButton.y))) menuButton->action();
+            if (audioButton->contains(Coordinate(event.mouseButton.x, event.mouseButton.y))) audioButton->action();
         }
     }
 }
@@ -54,5 +58,6 @@ void SettingsState::render(sf::RenderWindow& window) {
     window.clear();
     window.draw(text);
     menuButton->render(window);
+    audioButton->render(window);
     window.display();
 }

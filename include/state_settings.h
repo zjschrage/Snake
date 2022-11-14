@@ -6,6 +6,7 @@
 #include "direction.h"
 #include "state_game.h"
 #include "button_menu.h"
+#include "button_audio.h"
 
 class SettingsState : public IState {
 public:
@@ -21,6 +22,8 @@ private:
     sf::Font font;
     sf::Text text;
     Button* menuButton;
+    Button* audioButton;
+    Button* toroidalButton;
     bool running;
 
     void setupText();

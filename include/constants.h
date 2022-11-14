@@ -11,3 +11,4 @@ const unsigned SIZE_Y = 25;
 const unsigned BUTTON_WIDTH = 280;
 const unsigned BUTTON_LENGTH = 80;
 const uint32_t BUTTON_COLOR = 0x47fc86ff;
+const uint32_t BUTTON_COLOR_OFF = 0xde2b28ff;

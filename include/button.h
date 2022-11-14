@@ -13,7 +13,7 @@ public:
     const sf::RectangleShape& getBody() {return body;}
     virtual void action() = 0;
     virtual void hover() = 0;
-private:
+protected:
     sf::RectangleShape body;
     sf::Font font;
     sf::Text text;

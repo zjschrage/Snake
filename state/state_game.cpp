@@ -43,16 +43,25 @@ void GameState::reset() {
 void GameState::tick() {
     currentDirection = changeDirection(tentativeDirection, currentDirection);
     Coordinate next = s.nextLocation(currentDirection);
+    if (!checkNextLocation(next)) return;
+    CellState nextState = g.getCell(next).getState();
+    setNextStates(next, nextState);
+    updateCells();
+}
+
+bool GameState::checkNextLocation(Coordinate& next) {
     if (!g.inBounds(next)) {
         if (wrapStyle == TOROIDAL) {
             next = g.getWrappedCoordinate(next);
-            if (!g.inBounds(next)) return;
+            if (!g.inBounds(next)) running = false;
         } else {
             running = false;
-            return;
         }
     }
-    CellState nextState = g.getCell(next).getState();
+    return running;
+}
+
+void GameState::setNextStates(const Coordinate& next, const CellState& nextState) {
     switch(nextState) {
         case EMPTY:
             s.moveHead(next);
@@ -69,6 +78,9 @@ void GameState::tick() {
             g.getUpdateSet().insert(g.spawnFood());
             break;
     }
+}
+
+void GameState::updateCells() {
     for (Coordinate c : s.getSnake()) {
         g.setCell(c, SNAKE_BODY);
         g.getUpdateQueue().push(c);

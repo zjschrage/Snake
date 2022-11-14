@@ -1,6 +1,5 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "istate.h"
+#include <memory>
 
 template <typename T>
 class Singleton {
