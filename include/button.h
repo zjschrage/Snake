@@ -6,7 +6,6 @@
 class Button {
 public:
     Button() = default;
-    //virtual ~Button();
     Button(Coordinate position, Dimension size, sf::Color color, std::string text);
     bool contains(Coordinate mouse);
     void render(sf::RenderWindow& window);

@@ -11,7 +11,7 @@
 
 class MenuState : public IState {
 public:
-    MenuState(const Dimension& gridSize, const Dimension& cellSize);
+    MenuState();
     ~MenuState();
     void init() override;
     void handleEvents(sf::RenderWindow& window) override;
@@ -20,8 +20,6 @@ public:
     bool getRunning() override {return running;};
 
 private:
-    Dimension gridSize;
-    Dimension cellSize;
     uint32_t fontColor;
     uint32_t fontAnimCycle;
     sf::Font font;

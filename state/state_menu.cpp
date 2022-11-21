@@ -1,10 +1,7 @@
 #include "state_menu.h"
-#include "state_singleton.h"
 #include "constants.h"
 
-MenuState::MenuState(const Dimension& gridSize, const Dimension& cellSize) {
-    this->gridSize = gridSize;
-    this->cellSize = cellSize;
+MenuState::MenuState() {
     this->fontColor = 0xff;
     this->running = true;
     this->init();
@@ -40,7 +37,7 @@ void MenuState::setupButtons() {
     Coordinate c1 = Coordinate((DIM_X - bWidth)/2, bStartingY);
     Coordinate c2 = Coordinate((DIM_X - bWidth)/2, bStartingY + 100);
     Coordinate c3 = Coordinate((DIM_X - bWidth)/2, bStartingY + 200);
-    this->playButton = new PlayButton(c1, size, color, gridSize, cellSize);
+    this->playButton = new PlayButton(c1, size, color);
     this->settingsButton = new SettingsButton(c2, size, color);
     this->helpButton = new HelpButton(c3, size, color);
 }

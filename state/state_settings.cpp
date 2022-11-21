@@ -19,7 +19,7 @@ void SettingsState::setupText() {
     sf::Font f;
     f.loadFromFile("fonts/PixeloidSans.ttf");
     this->font = f;
-    std::string text = "Welcome to Snake, use WASD to move.\nCollect as many green apples as possible\nAs you eat you will get longer\nDont crash into your self\n(or walls if not on toroidal mode)\nIf you crash, hit enter to return to menu\n\n\n\nGame by Zack Schrage";
+    std::string text = "Settings Page\nToggle on Audio, Toroidal Mode (Wrap)\nOr change size of play area\n";
     sf::Text t(text, font, 50);
     t.setFillColor(sf::Color::Cyan);
     t.setPosition(50, 50);
@@ -34,9 +34,11 @@ void SettingsState::setupBackButton() {
     Dimension size2 = Dimension(bHeight, bHeight);
     sf::Color color = sf::Color(BUTTON_COLOR);
     Coordinate c = Coordinate((DIM_X - bWidth)/2, bStartingY);
-    Coordinate c2 = Coordinate((DIM_X - bWidth)/2, bStartingY - 200);
+    Coordinate c2 = Coordinate((DIM_X - bWidth)/2, bStartingY - 300);
+    Coordinate c3 = Coordinate((DIM_X - bWidth)/2, bStartingY - 200);
     menuButton = new MenuButton(c, size, color);
     audioButton = new AudioButton(c2, size2, color);
+    wrapButton = new WrapButton(c3, size2, color);
 }
 
 void SettingsState::handleEvents(sf::RenderWindow& window) {
@@ -46,6 +48,7 @@ void SettingsState::handleEvents(sf::RenderWindow& window) {
         if (event.type == sf::Event::MouseButtonPressed) {
             if (menuButton->contains(Coordinate(event.mouseButton.x, event.mouseButton.y))) menuButton->action();
             if (audioButton->contains(Coordinate(event.mouseButton.x, event.mouseButton.y))) audioButton->action();
+            if (wrapButton->contains(Coordinate(event.mouseButton.x, event.mouseButton.y))) wrapButton->action();
         }
     }
 }
@@ -59,5 +62,6 @@ void SettingsState::render(sf::RenderWindow& window) {
     window.draw(text);
     menuButton->render(window);
     audioButton->render(window);
+    wrapButton->render(window);
     window.display();
 }

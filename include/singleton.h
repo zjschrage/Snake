@@ -11,3 +11,6 @@ class Singleton {
         Singleton() {}
         static std::unique_ptr<T> single;
 };
+
+template <typename T>
+std::unique_ptr<T> Singleton<T>::single = nullptr;

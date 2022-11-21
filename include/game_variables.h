@@ -6,4 +6,10 @@ public:
     int gridSize;
     WrapStyle wrapStyle;
     bool audio;
+
+    GameVariables() {
+        gridSize = 25;
+        wrapStyle = TOROIDAL;
+        audio = true;
+    }
 };

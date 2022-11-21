@@ -7,6 +7,7 @@
 #include "state_game.h"
 #include "button_menu.h"
 #include "button_audio.h"
+#include "button_wrap.h"
 
 class SettingsState : public IState {
 public:
@@ -23,7 +24,7 @@ private:
     sf::Text text;
     Button* menuButton;
     Button* audioButton;
-    Button* toroidalButton;
+    Button* wrapButton;
     bool running;
 
     void setupText();

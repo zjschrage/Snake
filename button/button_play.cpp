@@ -1,9 +1,13 @@
 #include "button_play.h"
 #include "state_game.h"
-#include "state_singleton.h"
+#include "singleton.h"
+#include "istate.h"
+#include "game_variables.h"
+#include "constants.h"
+#include <iostream>
 
-PlayButton::PlayButton(Coordinate position, Dimension size, sf::Color color, Dimension gridSize, Dimension cellSize) 
-    : Button(position, size, color, "Play"), gridSize(gridSize), cellSize(cellSize) {
+PlayButton::PlayButton(Coordinate position, Dimension size, sf::Color color) 
+    : Button(position, size, color, "Play") {
     
 }
 
@@ -12,6 +16,7 @@ void PlayButton::hover() {
 }
 
 void PlayButton::action() {
-    auto state = std::make_unique<GameState>(Dimension(gridSize.x, gridSize.y), Dimension(cellSize.x, cellSize.y), Coordinate(12, 12), TOROIDAL);
-    StateSingleton::setState(std::move(state));
+    int gSize = Singleton<GameVariables>::get().gridSize;
+    auto state = std::make_unique<GameState>(Dimension(gSize, gSize), Dimension((float)DIM_X/gSize, (float)DIM_Y/gSize), Coordinate(12, 12), Singleton<GameVariables>::get().wrapStyle);
+    Singleton<IState>::set(std::move(state));
 }
