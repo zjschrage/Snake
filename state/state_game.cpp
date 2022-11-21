@@ -3,6 +3,9 @@
 #include "singleton.h"
 #include "istate.h"
 #include "score_manager.h"
+#include "game_variables.h"
+#include "audio.h"
+#include <iostream>
 
 GameState::GameState(const Dimension& gridSize, const Dimension& cellSize, const Coordinate& snakeStart, WrapStyle wrapStyle) {
     this->g = Grid(gridSize, cellSize);
@@ -44,6 +47,7 @@ void GameState::reset() {
 
 void GameState::stop() {
     Singleton<ScoreManager>::get().addScore(s.getSnake().size());
+    if (Singleton<GameVariables>::get().audio) Singleton<Audio>::get().die.play();
     running = false;
 }
 
@@ -82,6 +86,7 @@ void GameState::setNextStates(const Coordinate& next, const CellState& nextState
             s.moveHead(next);
             g.getUpdateSet().erase(next);
             g.getUpdateSet().insert(g.spawnFood());
+            if (Singleton<GameVariables>::get().audio) Singleton<Audio>::get().eat.play();
             break;
     }
 }
@@ -95,6 +100,7 @@ void GameState::updateCells() {
 }
 
 void GameState::render(sf::RenderWindow& window) {
+    if (!running) return;
     window.clear();
     for (Coordinate c : g.getUpdateSet()) {
         window.draw(g.getCell(c).getGraphicCell());

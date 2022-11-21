@@ -6,20 +6,16 @@
 #include "constants.h"
 #include "game_variables.h"
 #include "score_manager.h"
+#include "audio.h"
+
+void initManagers();
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(DIM_X, DIM_Y), TITLE);
     sf::Clock clock;
     window.setFramerateLimit(FPS);
 
-    auto gameVariables = std::make_unique<GameVariables>();
-    Singleton<GameVariables>::set(std::move(gameVariables));
-
-    auto scoreManager = std::make_unique<ScoreManager>();
-    Singleton<ScoreManager>::set(std::move(scoreManager));
-
-    auto state = std::make_unique<MenuState>();
-    Singleton<IState>::set(std::move(state));
+    initManagers();
 
     while (window.isOpen()) {
 
@@ -34,4 +30,18 @@ int main() {
     }
 
     return 0;
+}
+
+void initManagers() {
+    auto gameVariables = std::make_unique<GameVariables>();
+    Singleton<GameVariables>::set(std::move(gameVariables));
+
+    auto scoreManager = std::make_unique<ScoreManager>();
+    Singleton<ScoreManager>::set(std::move(scoreManager));
+
+    auto audioManager = std::make_unique<Audio>();
+    Singleton<Audio>::set(std::move(audioManager));
+
+    auto state = std::make_unique<MenuState>();
+    Singleton<IState>::set(std::move(state));
 }
