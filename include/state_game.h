@@ -34,5 +34,6 @@ private:
     bool checkNextLocation(Coordinate& next);
     void setNextStates(const Coordinate& next, const CellState& nextState);
     void updateCells();
+    void stop();
 
 };

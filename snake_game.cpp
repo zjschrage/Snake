@@ -5,6 +5,7 @@
 #include "state_menu.h"
 #include "constants.h"
 #include "game_variables.h"
+#include "score_manager.h"
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(DIM_X, DIM_Y), TITLE);
@@ -13,6 +14,9 @@ int main() {
 
     auto gameVariables = std::make_unique<GameVariables>();
     Singleton<GameVariables>::set(std::move(gameVariables));
+
+    auto scoreManager = std::make_unique<ScoreManager>();
+    Singleton<ScoreManager>::set(std::move(scoreManager));
 
     auto state = std::make_unique<MenuState>();
     Singleton<IState>::set(std::move(state));

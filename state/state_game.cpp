@@ -2,6 +2,7 @@
 #include "state_menu.h"
 #include "singleton.h"
 #include "istate.h"
+#include "score_manager.h"
 
 GameState::GameState(const Dimension& gridSize, const Dimension& cellSize, const Coordinate& snakeStart, WrapStyle wrapStyle) {
     this->g = Grid(gridSize, cellSize);
@@ -41,7 +42,13 @@ void GameState::reset() {
     Singleton<IState>::set(std::move(state));
 }
 
+void GameState::stop() {
+    Singleton<ScoreManager>::get().addScore(s.getSnake().size());
+    running = false;
+}
+
 void GameState::tick() {
+    if (!running) return;
     currentDirection = changeDirection(tentativeDirection, currentDirection);
     Coordinate next = s.nextLocation(currentDirection);
     if (!checkNextLocation(next)) return;
@@ -54,10 +61,8 @@ bool GameState::checkNextLocation(Coordinate& next) {
     if (!g.inBounds(next)) {
         if (wrapStyle == TOROIDAL) {
             next = g.getWrappedCoordinate(next);
-            if (!g.inBounds(next)) running = false;
-        } else {
-            running = false;
-        }
+            if (!g.inBounds(next)) stop();
+        } else stop();
     }
     return running;
 }
@@ -71,7 +76,7 @@ void GameState::setNextStates(const Coordinate& next, const CellState& nextState
             break;
         case SNAKE_BODY:
         case SNAKE_HEAD:
-            running = false;
+            stop();
             break;
         case FOOD:
             s.moveHead(next);
