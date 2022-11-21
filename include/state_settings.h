@@ -8,6 +8,7 @@
 #include "button_menu.h"
 #include "button_audio.h"
 #include "button_wrap.h"
+#include "button_gridsize.h"
 
 class SettingsState : public IState {
 public:
@@ -25,6 +26,7 @@ private:
     Button* menuButton;
     Button* audioButton;
     Button* wrapButton;
+    ButtonSelector* gridsizeButton;
     bool running;
 
     void setupText();

@@ -7,11 +7,12 @@ class ButtonSelector {
 public:
     ButtonSelector() = default;
     ButtonSelector(Coordinate position, Dimension size, sf::Color color, std::string text);
-    bool contains(Coordinate mouse);
+    bool containsUp(Coordinate mouse);
+    bool containsDown(Coordinate mouse);
     void render(sf::RenderWindow& window);
     const sf::RectangleShape& getUp() {return up;}
     const sf::RectangleShape& getDown() {return down;}
-    virtual void action() = 0;
+    virtual void action(int delta) = 0;
     virtual void hover() = 0;
 protected:
     sf::RectangleShape up;

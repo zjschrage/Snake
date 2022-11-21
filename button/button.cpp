@@ -1,5 +1,4 @@
 #include "button.h"
-#include "font.h"
 
 Button::Button(Coordinate position, Dimension size, sf::Color color, std::string text) {
     this->body = sf::RectangleShape(sf::Vector2<float>(size.x, size.y));

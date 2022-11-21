@@ -29,16 +29,18 @@ void SettingsState::setupText() {
 void SettingsState::setupBackButton() {
     int bWidth = BUTTON_WIDTH;
     int bHeight = BUTTON_LENGTH;
-    int bStartingY = 1000;
+    int bStartingY = 600;
     Dimension size = Dimension(bWidth, bHeight);
     Dimension size2 = Dimension(bHeight, bHeight);
     sf::Color color = sf::Color(BUTTON_COLOR);
     Coordinate c = Coordinate((DIM_X - bWidth)/2, bStartingY);
-    Coordinate c2 = Coordinate((DIM_X - bWidth)/2, bStartingY - 300);
-    Coordinate c3 = Coordinate((DIM_X - bWidth)/2, bStartingY - 200);
-    menuButton = new MenuButton(c, size, color);
-    audioButton = new AudioButton(c2, size2, color);
-    wrapButton = new WrapButton(c3, size2, color);
+    Coordinate c2 = Coordinate((DIM_X - bWidth)/2, bStartingY + 100);
+    Coordinate c3 = Coordinate((DIM_X - bWidth)/2, bStartingY + 200);
+    Coordinate c4 = Coordinate((DIM_X - bWidth)/2, bStartingY + 300);
+    audioButton = new AudioButton(c, size2, color);
+    wrapButton = new WrapButton(c2, size2, color);
+    gridsizeButton = new GridSizeButton(c3, size2, color);
+    menuButton = new MenuButton(c4, size, color);
 }
 
 void SettingsState::handleEvents(sf::RenderWindow& window) {
@@ -49,6 +51,8 @@ void SettingsState::handleEvents(sf::RenderWindow& window) {
             if (menuButton->contains(Coordinate(event.mouseButton.x, event.mouseButton.y))) menuButton->action();
             if (audioButton->contains(Coordinate(event.mouseButton.x, event.mouseButton.y))) audioButton->action();
             if (wrapButton->contains(Coordinate(event.mouseButton.x, event.mouseButton.y))) wrapButton->action();
+            if (gridsizeButton->containsDown(Coordinate(event.mouseButton.x, event.mouseButton.y))) gridsizeButton->action(-1);
+            if (gridsizeButton->containsUp(Coordinate(event.mouseButton.x, event.mouseButton.y))) gridsizeButton->action(1);
         }
     }
 }
@@ -63,5 +67,6 @@ void SettingsState::render(sf::RenderWindow& window) {
     menuButton->render(window);
     audioButton->render(window);
     wrapButton->render(window);
+    gridsizeButton->render(window);
     window.display();
 }
