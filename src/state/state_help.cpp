@@ -1,5 +1,6 @@
 #include "state_help.h"
 #include "constants.h"
+#include "directory.h"
 
 HelpState::HelpState() {
     this->running = true;
@@ -17,7 +18,7 @@ void HelpState::init() {
 
 void HelpState::setupText() {
     sf::Font f;
-    f.loadFromFile("fonts/PixeloidSans.ttf");
+    f.loadFromFile(Directory::get() + PATH_TO_FONT);
     this->font = f;
     std::string text = "Welcome to Snake, use WASD to move.\nCollect as many green apples as possible\nAs you eat you will get longer\nDont crash into your self\n(or walls if not on toroidal mode)\nIf you crash, hit enter to return to menu\n\n\n\nGame by Zack Schrage";
     sf::Text t(text, font, 50);

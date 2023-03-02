@@ -1,12 +1,16 @@
 #include "score_manager.h"
+#include "constants.h"
+#include "directory.h"
 #include <algorithm>
+#include <iostream>
 
 ScoreManager::ScoreManager() {
     cacheScores();
 }
 
 void ScoreManager::cacheScores() {
-    FILE* fp = fopen("data/highscores.txt", "r");
+    //std::cout << "SCORE MANAGER DIRECTORY:" << (Directory::get() + PATH_TO_HIGHSCORES).c_str() << std::endl;
+    FILE* fp = fopen((Directory::get() + PATH_TO_HIGHSCORES).c_str(), "r");
     int tempScore = 0;
     for (int i = 0; i < 5; i++) {
         fscanf(fp, "%d\n", &tempScore);
@@ -16,7 +20,7 @@ void ScoreManager::cacheScores() {
 }
 
 void ScoreManager::writeScores() {
-    FILE* fp = fopen("data/highscores.txt", "w");
+    FILE* fp = fopen((Directory::get() + PATH_TO_HIGHSCORES).c_str(), "w");
     for (int i = 0; i < 5; i++) {
         fprintf(fp, "%d\n", scores[i]);
     }

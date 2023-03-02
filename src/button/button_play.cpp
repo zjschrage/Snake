@@ -4,7 +4,6 @@
 #include "istate.h"
 #include "game_variables.h"
 #include "constants.h"
-#include <iostream>
 
 PlayButton::PlayButton(Coordinate position, Dimension size, sf::Color color) 
     : Button(position, size, color, "Play") {

@@ -16,8 +16,8 @@ void GridSizeButton::hover() {
 
 void GridSizeButton::action(int delta) {
     int gridSize = Singleton<GameVariables>::get().gridSize;
-    if (delta < 0 && gridSize <= 15) return;
-    if (delta > 0 && gridSize >= 50) return;
+    if (delta < 0 && gridSize <= MIN_GRID_SIZE) return;
+    if (delta > 0 && gridSize >= MAX_GRID_SIZE) return;
     Singleton<GameVariables>::get().gridSize += delta;
     text.setString(std::to_string(Singleton<GameVariables>::get().gridSize));
 }

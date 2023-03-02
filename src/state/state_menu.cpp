@@ -1,5 +1,6 @@
 #include "state_menu.h"
 #include "constants.h"
+#include "directory.h"
 
 MenuState::MenuState() {
     this->fontColor = 0xff;
@@ -20,7 +21,7 @@ void MenuState::init() {
 
 void MenuState::setupTitle() {
     sf::Font f;
-    f.loadFromFile("fonts/PixeloidSans.ttf");
+    f.loadFromFile(Directory::get() + PATH_TO_FONT);
     this->font = f;
     sf::Text t("snake", font, 100);
     t.setFillColor(sf::Color(fontColor));

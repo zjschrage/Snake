@@ -1,5 +1,6 @@
 #include "state_settings.h"
 #include "constants.h"
+#include "directory.h"
 
 SettingsState::SettingsState() {
     this->running = true;
@@ -17,7 +18,7 @@ void SettingsState::init() {
 
 void SettingsState::setupText() {
     sf::Font f;
-    f.loadFromFile("fonts/PixeloidSans.ttf");
+    f.loadFromFile(Directory::get() + PATH_TO_FONT);
     this->font = f;
     std::string text = "Settings Page\nToggle on Audio, Toroidal Mode (Wrap)\nOr change size of play area\n";
     sf::Text t(text, font, 50);

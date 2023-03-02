@@ -1,13 +1,15 @@
 #pragma once
 #include <SFML/Audio.hpp>
+#include "constants.h"
+#include "directory.h"
 
 class Audio {
 public:
 
     Audio() {
-        eatbuffer.loadFromFile("aud/eat.wav");
+        eatbuffer.loadFromFile(Directory::get() + PATH_TO_AUDIO + "eat.wav");
         eat.setBuffer(eatbuffer);
-        diebuffer.loadFromFile("aud/die.wav");
+        diebuffer.loadFromFile(Directory::get() + PATH_TO_AUDIO + "die.wav");
         die.setBuffer(diebuffer);
     }
     

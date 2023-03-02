@@ -1,5 +1,8 @@
+#include <mach-o/dyld.h>
 #include <SFML/Graphics.hpp>
 #include <stdio.h>
+#include <iostream>
+#include <string.h>
 #include "dimension.h"
 #include "singleton.h"
 #include "state_menu.h"
@@ -7,13 +10,18 @@
 #include "game_variables.h"
 #include "score_manager.h"
 #include "audio.h"
+#include "directory.h"
 
+void initPath();
 void initManagers();
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(DIM_X, DIM_Y), TITLE);
     sf::Clock clock;
     window.setFramerateLimit(FPS);
+
+    Directory::set("");
+    initPath();
 
     initManagers();
 
@@ -30,6 +38,16 @@ int main() {
     }
 
     return 0;
+}
+
+void initPath() {
+    char totalpath[1024];
+    uint32_t size = sizeof(totalpath);
+    _NSGetExecutablePath(totalpath, &size);
+    std::string path = std::string(totalpath);
+    path = path.substr(0, path.size() - 9);
+    Directory::set(path);
+    std::cout << Directory::get() << std::endl;
 }
 
 void initManagers() {

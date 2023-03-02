@@ -1,4 +1,6 @@
 #include "button_selector.h"
+#include "constants.h"
+#include "directory.h"
 
 ButtonSelector::ButtonSelector(Coordinate position, Dimension size, sf::Color color, std::string text) {
     this->up = sf::RectangleShape(sf::Vector2<float>(size.x, size.y*3/7));
@@ -8,7 +10,7 @@ ButtonSelector::ButtonSelector(Coordinate position, Dimension size, sf::Color co
     this->up.setFillColor(color);
     this->down.setFillColor(color);
     sf::Font f;
-    f.loadFromFile("fonts/PixeloidSans.ttf");
+    f.loadFromFile(Directory::get() + PATH_TO_FONT);
     this->font = f;
     sf::Text t(text, font, 60);
     t.setFillColor(sf::Color::White);

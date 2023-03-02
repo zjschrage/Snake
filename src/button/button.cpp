@@ -1,11 +1,13 @@
 #include "button.h"
+#include "constants.h"
+#include "directory.h"
 
 Button::Button(Coordinate position, Dimension size, sf::Color color, std::string text) {
     this->body = sf::RectangleShape(sf::Vector2<float>(size.x, size.y));
     this->body.setPosition(position.x, position.y);
     this->body.setFillColor(color);
     sf::Font f;
-    f.loadFromFile("fonts/PixeloidSans.ttf");
+    f.loadFromFile(Directory::get() + PATH_TO_FONT);
     this->font = f;
     sf::Text t(text, font, 60);
     t.setFillColor(sf::Color::Black);
